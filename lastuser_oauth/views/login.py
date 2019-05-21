@@ -172,6 +172,8 @@ def reset():
     # User wants to reset password
     # Ask for username or email, verify it, and send a reset code
     form = PasswordResetRequestForm()
+    if not (current_app.config.get('RECAPTCHA_PUBLIC_KEY') and current_app.config.get('RECAPTCHA_PRIVATE_KEY')):
+        del form.recaptcha
     if getbool(request.args.get('expired')):
         message = _(u"Your password has expired. Please enter your username "
             "or email address to request a reset code and set a new password")

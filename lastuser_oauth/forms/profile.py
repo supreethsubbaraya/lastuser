@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import current_app
+from flask_wtf import RecaptchaField
 from coaster.utils import sorted_timezones
 from baseframe import _, __
 import baseframe.forms as forms
@@ -13,6 +14,7 @@ timezones = sorted_timezones()
 class PasswordResetRequestForm(forms.Form):
     username = forms.StringField(__("Username or Email"), validators=[forms.validators.DataRequired()],
         widget_attrs={'autocorrect': 'none', 'autocapitalize': 'none'})
+    recaptcha = RecaptchaField(__("Are you human?"))
 
     def validate_username(self, field):
         user = getuser(field.data)
@@ -28,6 +30,7 @@ class PasswordResetForm(forms.Form):
     password = forms.PasswordField(__("New password"), validators=[forms.validators.DataRequired()])
     confirm_password = forms.PasswordField(__("Confirm password"),
         validators=[forms.validators.DataRequired(), forms.validators.EqualTo('password')])
+    recaptcha = RecaptchaField(__("Are you human?"))
 
     def validate_username(self, field):
         user = getuser(field.data)

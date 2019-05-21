@@ -66,6 +66,8 @@ def change_password():
 @requires_login
 def add_email():
     form = NewEmailAddressForm()
+    if not (current_app.config.get('RECAPTCHA_PUBLIC_KEY') and current_app.config.get('RECAPTCHA_PRIVATE_KEY')):
+        del form.recaptcha
     if form.validate_on_submit():
         useremail = UserEmailClaim.get(user=current_auth.user, email=form.email.data)
         if useremail is None:
@@ -170,6 +172,8 @@ def verify_email(md5sum):
 @requires_login
 def add_phone():
     form = NewPhoneForm()
+    if not (current_app.config.get('RECAPTCHA_PUBLIC_KEY') and current_app.config.get('RECAPTCHA_PRIVATE_KEY')):
+        del form.recaptcha
     if form.validate_on_submit():
         userphone = UserPhoneClaim.get(user=current_auth.user, phone=form.phone.data)
         if userphone is None:
