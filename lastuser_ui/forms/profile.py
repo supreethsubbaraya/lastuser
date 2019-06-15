@@ -20,7 +20,7 @@ class NewEmailAddressForm(forms.Form):
         (__(u"Home"), __(u"Home")),
         (__(u"Work"), __(u"Work")),
         (__(u"Other"), __(u"Other"))])
-    recaptcha = RecaptchaField(__("Are you human?"))
+    recaptcha = RecaptchaField()
 
     # TODO: Move to function and place before ValidEmail()
     def validate_email(self, field):
@@ -49,7 +49,7 @@ class NewPhoneForm(forms.Form):
     phone = forms.TelField(__("Phone number"), default='+91',
         validators=[forms.validators.DataRequired()],
         description=__("Mobile numbers only at this time. Please prefix with '+' and country code."))
-    recaptcha = RecaptchaField(__("Are you human?"))
+    recaptcha = RecaptchaField()
 
     # Temporarily removed since we only support mobile numbers at this time. When phone call validation is added,
     # we can ask for other types of numbers:

@@ -222,7 +222,6 @@ def reset():
             it may have landed in your spam or junk folder.
             The reset link is valid for 24 hours.
             """.format(masked_email=mask_email(email))))
-
     return render_form(form=form, title=_("Reset password"), message=message, submit=_("Send reset code"), ajax=False)
 
 

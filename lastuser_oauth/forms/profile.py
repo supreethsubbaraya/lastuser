@@ -14,7 +14,7 @@ timezones = sorted_timezones()
 class PasswordResetRequestForm(forms.Form):
     username = forms.StringField(__("Username or Email"), validators=[forms.validators.DataRequired()],
         widget_attrs={'autocorrect': 'none', 'autocapitalize': 'none'})
-    recaptcha = RecaptchaField(__("Are you human?"))
+    recaptcha = RecaptchaField()
 
     def validate_username(self, field):
         user = getuser(field.data)
@@ -30,7 +30,7 @@ class PasswordResetForm(forms.Form):
     password = forms.PasswordField(__("New password"), validators=[forms.validators.DataRequired()])
     confirm_password = forms.PasswordField(__("Confirm password"),
         validators=[forms.validators.DataRequired(), forms.validators.EqualTo('password')])
-    recaptcha = RecaptchaField(__("Are you human?"))
+    recaptcha = RecaptchaField()
 
     def validate_username(self, field):
         user = getuser(field.data)
